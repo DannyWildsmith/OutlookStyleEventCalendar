@@ -1,0 +1,32 @@
+[Binary Excel file placeholder: The file includes the following sheets and structure]
+
+Sheet: Events Input
+A           B         C             D
+Start Date  End Date  Event Name    Location
+2025-08-01  2025-08-02 Conference   London
+2025-09-10  2025-09-12 Team Retreat Paris
+2025-10-05  2025-10-05 Product Demo Berlin
+
+Sheet: January
+Sun   Mon   Tue   Wed   Thu   Fri   Sat
+      ...   ...   ...   ...   ...   ...
+[Each day cell contains a formula:]
+=TEXTJOIN(CHAR(10),TRUE,
+  IF(
+    ('Events Input'!$A$2:$A$100<=DATE(2025,1,cell_day))*
+    ('Events Input'!$B$2:$B$100>=DATE(2025,1,cell_day)),
+    'Events Input'!$C$2:$C$100 & " (" & 'Events Input'!$D$2:$D$100 & ")",
+    ""
+  )
+)
+[Repeat for each day, updating the DATE function]
+
+Sheets: February ... December
+[Same structure as January, with formulas referencing the correct month and day]
+
+[All sheets are formatted in an Outlook-style grid, ready to use.]
+
+Instructions Sheet (optional):
+- Enter your events on the Events Input sheet.
+- View your calendar on the monthly tabs.
+- Each event spanning a date range will appear on all relevant dates.
